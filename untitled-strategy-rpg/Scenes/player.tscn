@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgbew5ktc0pta"]
+
+[ext_resource type="Texture2D" uid="uid://odcvaohl0hlb" path="res://Assets/BaboSpriteSheet.png" id="1_tfq7n"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_xwwi5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q6a20"]
+radius = 1.435
+height = 3.804
+
+[sub_resource type="Curve3D" id="Curve3D_56o72"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0)
+}
+point_count = 1
+up_vector_enabled = false
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_xwwi5")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("CapsuleShape3D_q6a20")
+
+[node name="Path3D" type="Path3D" parent="RigidBody3D"]
+curve = SubResource("Curve3D_56o72")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="RigidBody3D/Path3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.09786e-05, -4.673e-05, 0.0286334)
+rotation_mode = 0
+loop = false
+
+[node name="Sprite3D" type="Sprite3D" parent="RigidBody3D/Path3D/PathFollow3D"]
+pixel_size = 0.1
+billboard = 2
+alpha_cut = 2
+texture_filter = 2
+texture = ExtResource("1_tfq7n")
+hframes = 6
+vframes = 10
+frame = 20
+
+[connection signal="input_event" from="RigidBody3D" to="." method="_on_rigid_body_3d_input_event"]

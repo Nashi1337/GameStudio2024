@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://52vnqm4yfu2r"]
+
+[ext_resource type="Script" path="res://Scripts/battle_map.gd" id="1_jd12p"]
+[ext_resource type="PackedScene" uid="uid://bgbew5ktc0pta" path="res://Scenes/player.tscn" id="2_cglfe"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_28tpj"]
+
+[sub_resource type="Sky" id="Sky_0npqe"]
+sky_material = SubResource("ProceduralSkyMaterial_28tpj")
+
+[sub_resource type="Environment" id="Environment_1twlk"]
+background_mode = 2
+sky = SubResource("Sky_0npqe")
+ambient_light_source = 3
+tonemap_mode = 2
+sdfgi_enabled = true
+
+[node name="BattleMap" type="Node3D"]
+script = ExtResource("1_jd12p")
+
+[node name="Player" parent="." instance=ExtResource("2_cglfe")]
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.907044, 0.421036, 0, -0.421036, 0.907044, 5, 7, 24.015)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.79653, 0.460425, -0.391853, 0, 0.64812, 0.761538, 0.604599, -0.606588, 0.516247, 1, 7, 7)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1twlk")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 1)
+visible = false
+light_energy = 10.535
+shadow_enabled = true
