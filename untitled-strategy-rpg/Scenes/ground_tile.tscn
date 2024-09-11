@@ -1,29 +1,42 @@
-[gd_scene load_steps=6 format=3 uid="uid://yfawuaxs82sx"]
+[gd_scene load_steps=9 format=3 uid="uid://yfawuaxs82sx"]
 
-[ext_resource type="Texture2D" uid="uid://2nl7d1trd6qs" path="res://Assets/grasslands.png" id="1_7ycgf"]
 [ext_resource type="Script" path="res://Scripts/ground_tile.gd" id="1_yo3p7"]
+[ext_resource type="Texture2D" uid="uid://4xe7nmhbxcuq" path="res://Assets/Textures/rocky_terrain/rocky_terrain_diff_1k.jpg" id="2_wp60i"]
+[ext_resource type="Texture2D" uid="uid://cqv65ykw53sb" path="res://Assets/Textures/rocky_terrain/rocky_terrain_disp_1k.png" id="3_g8oew"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vbrr5"]
-albedo_color = Color(0.159786, 0.51151, 0.304971, 1)
-albedo_texture = ExtResource("1_7ycgf")
+albedo_texture = ExtResource("2_wp60i")
+normal_scale = 9.63
+heightmap_scale = -16.0
+heightmap_texture = ExtResource("3_g8oew")
+uv1_scale = Vector3(9.07, 9.07, 9.07)
 
 [sub_resource type="BoxMesh" id="BoxMesh_i2uiq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dbjkr"]
 size = Vector3(1.095, 1.795, 1.05)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lhwnu"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_svtpd"]
+material = SubResource("StandardMaterial3D_lhwnu")
+
 [node name="Ground" type="Node3D"]
 transform = Transform3D(6, 0, 0, 0, 0.1, 0, 0, 0, 6, 0, 0, 0)
 script = ExtResource("1_yo3p7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.97, 0, 0, 0, 0.97, 0, 0, 0, 0.97, 0, 0.03, 0)
 material_override = SubResource("StandardMaterial3D_vbrr5")
 mesh = SubResource("BoxMesh_i2uiq")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_dbjkr")
+
+[node name="Border" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_svtpd")
 
 [connection signal="input_event" from="StaticBody3D" to="." method="_on_static_body_3d_input_event"]

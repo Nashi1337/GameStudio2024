@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://52vnqm4yfu2r"]
+[gd_scene load_steps=7 format=3 uid="uid://52vnqm4yfu2r"]
 
 [ext_resource type="Script" path="res://Scripts/battle_map.gd" id="1_jd12p"]
 [ext_resource type="PackedScene" uid="uid://bgbew5ktc0pta" path="res://Scenes/player.tscn" id="2_cglfe"]
+[ext_resource type="Script" path="res://Scripts/camera_3d.gd" id="3_702gt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_28tpj"]
 
@@ -22,6 +23,7 @@ script = ExtResource("1_jd12p")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 0.907044, 0.421036, 0, -0.421036, 0.907044, 5, 7, 24.015)
+script = ExtResource("3_702gt")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.79653, 0.460425, -0.391853, 0, 0.64812, 0.761538, 0.604599, -0.606588, 0.516247, 1, 7, 7)

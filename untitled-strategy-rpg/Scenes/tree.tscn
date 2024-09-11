@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn72r2f758l85"]
+
+[ext_resource type="Texture2D" uid="uid://ccblfoagqgr2o" path="res://Assets/Tree_SpriteSheet_Outlined.png" id="1_6egpc"]
+
+[node name="Tree" type="Node3D"]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0.637938, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+alpha_cut = 2
+texture_filter = 2
+texture = ExtResource("1_6egpc")
+hframes = 5
+frame = 1
+region_enabled = true
+region_rect = Rect2(0, 0, 448, 128)
