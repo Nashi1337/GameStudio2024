@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlenbvi6fcvnw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e2mgc"]
+font_size = 61
+
+[node name="HUD" type="Node2D"]
+
+[node name="TileInfo" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "text"
+label_settings = SubResource("LabelSettings_e2mgc")

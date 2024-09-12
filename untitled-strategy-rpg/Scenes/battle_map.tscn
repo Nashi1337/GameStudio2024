@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://52vnqm4yfu2r"]
+[gd_scene load_steps=8 format=3 uid="uid://52vnqm4yfu2r"]
 
 [ext_resource type="Script" path="res://Scripts/battle_map.gd" id="1_jd12p"]
 [ext_resource type="PackedScene" uid="uid://bgbew5ktc0pta" path="res://Scenes/player.tscn" id="2_cglfe"]
 [ext_resource type="Script" path="res://Scripts/camera_3d.gd" id="3_702gt"]
+[ext_resource type="PackedScene" uid="uid://dlenbvi6fcvnw" path="res://Scenes/hud.tscn" id="4_5xraq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_28tpj"]
 
@@ -37,3 +38,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 1)
 visible = false
 light_energy = 10.535
 shadow_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("4_5xraq")]

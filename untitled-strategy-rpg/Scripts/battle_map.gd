@@ -17,7 +17,7 @@ func create_grid():
 		for y in range(grid_size.y):
 			var tile_instance = tile_scene.instantiate()  # Create an instance of the tile
 			add_child(tile_instance)  # Add the tile to the scene
-
+			tile_instance.add_to_group("tiles")
 			# Position the tile
 			tile_instance.transform.origin = Vector3(x * tile_spacing, 0, y * tile_spacing)
 
