@@ -1,12 +1,48 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlenbvi6fcvnw"]
+[gd_scene load_steps=4 format=3 uid="uid://dlenbvi6fcvnw"]
+
+[sub_resource type="Theme" id="Theme_rmpjs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7g4m"]
+bg_color = Color(0.6, 0.6, 0.6, 0.243137)
 
 [sub_resource type="LabelSettings" id="LabelSettings_e2mgc"]
+line_spacing = -20.0
 font_size = 61
 
 [node name="HUD" type="Node2D"]
 
-[node name="TileInfo" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="Panel" type="Panel" parent="."]
+offset_right = 596.0
+offset_bottom = 282.0
+mouse_filter = 1
+theme = SubResource("Theme_rmpjs")
+theme_override_styles/panel = SubResource("StyleBoxFlat_s7g4m")
+
+[node name="TileInfo" type="Label" parent="Panel"]
+offset_left = 400.0
+offset_right = 517.0
+offset_bottom = 84.0
+text = "text"
+label_settings = SubResource("LabelSettings_e2mgc")
+
+[node name="SelectedTile" type="Label" parent="Panel"]
+offset_right = 117.0
+offset_bottom = 84.0
+text = "Selected Tile:"
+label_settings = SubResource("LabelSettings_e2mgc")
+
+[node name="SelectedCharacter" type="Label" parent="Panel"]
+offset_top = 94.0
+offset_right = 571.0
+offset_bottom = 242.0
+text = "Selected 
+Character:"
+label_settings = SubResource("LabelSettings_e2mgc")
+
+[node name="CharacterInfo" type="Label" parent="Panel"]
+offset_left = 312.0
+offset_top = 158.0
+offset_right = 429.0
+offset_bottom = 242.0
 text = "text"
 label_settings = SubResource("LabelSettings_e2mgc")

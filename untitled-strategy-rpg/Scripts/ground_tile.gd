@@ -13,14 +13,15 @@ var in_range = false
 @onready var border : MeshInstance3D
 @onready var game_manager = get_node("/root/BattleMap")
 @onready var tree_scene = preload("res://Scenes/tree.tscn")
-@onready var label = get_tree().root.get_node("BattleMap/CanvasLayer/HUD/TileInfo")
+@onready var hud = get_tree().root.get_node("BattleMap/CanvasLayer/HUD")
+@onready var hud_tile_info = get_tree().root.get_node("BattleMap/CanvasLayer/HUD/Panel/TileInfo")
 @onready var camera = get_viewport().get_camera_3d()
 
 func _ready() -> void:
 	type = "Grass"
 	maybe_spawn_tree()
 	setup_border()
-	label.visible = false
+	hud.visible = false
 
 func setup_border():
 	border = $Border
@@ -59,16 +60,16 @@ func _on_static_body_3d_input_event(camera: Node, event: InputEvent, event_posit
 func _on_static_body_3d_mouse_entered() -> void:
 	mouse_over = true
 	border_material.albedo_color = highlight_color
-	label.text = type
-	label.visible = true
+	hud_tile_info.text = type
+	hud.visible = true
 	
 func _on_static_body_3d_mouse_exited() -> void:
 	if mouse_over and not in_range:
 		remove_highlight()
-		label.visible = false
+		hud.visible = false
 		mouse_over=false
 	elif mouse_over and in_range:
-		label.visible = false
+		hud.visible = false
 		mouse_over = false
 		highlight()
 

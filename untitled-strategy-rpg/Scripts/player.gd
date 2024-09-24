@@ -4,6 +4,7 @@ var selected = false
 var path_follow : PathFollow3D
 var selected_tile = null
 @onready var game_manager = get_node("/root/BattleMap")
+@onready var hud_character_info = get_tree().root.get_node("BattleMap/CanvasLayer/HUD/Panel/TileInfo")
 var path_total_length: float = 0.0
 var go = false
 var move_range = 5
