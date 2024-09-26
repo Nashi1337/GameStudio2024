@@ -4,14 +4,21 @@ var selected = false
 var path_follow : PathFollow3D
 var selected_tile = null
 @onready var game_manager = get_node("/root/BattleMap")
-@onready var hud_character_info = get_tree().root.get_node("BattleMap/CanvasLayer/HUD/Panel/TileInfo")
+@onready var battle_manager = get_node("/root/BattleMap/BattleManager")
+@onready var hud_character_info = get_tree().root.get_node("BattleMap/CanvasLayer/HUD/InfoBar/TileInfo")
 var path_total_length: float = 0.0
 var go = false
-var move_range = 5
+@export var unit_name = ""
+@export var move_range = 5
+@export var initiative = 7
+@export var enemy = false
 var player_grid_position = Vector2(0,0)
+
+signal turn_started
 
 func _ready():
 	path_follow = $RigidBody3D/Path3D/PathFollow3D
+	add_to_group("units")
 
 func on_tile_clicked(tile):
 	if selected and tile.is_highlighted():
@@ -50,6 +57,8 @@ func _process(delta):
 			game_manager.call("select_unit", null)
 			go = false
 			path_follow.progress = path_total_length
+			battle_manager.next_turn()
+			remove_all_highlights()
 
 
 func _on_rigid_body_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
@@ -70,3 +79,21 @@ func highlight_tiles_in_range():
 		
 func calculate_manhattan_distance(start_coords:Vector2, target_coords:Vector2)-> int:
 	return abs(start_coords.x - target_coords.x) + abs(start_coords.y - target_coords.y)
+
+func get_initiative() -> int:
+	return initiative
+	
+func get_unit_name() -> String:
+	return unit_name
+
+func give_name(name:String) -> void:
+	unit_name = name
+
+func set_initiative(value:int):
+	initiative = value
+	
+func set_move_range(value:int):
+	move_range = value
+
+func set_is_enemy(value:bool):
+	enemy = value

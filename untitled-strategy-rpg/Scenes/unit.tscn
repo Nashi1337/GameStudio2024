@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg3081dkxjk46"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_qs01i"]
+[ext_resource type="Texture2D" uid="uid://c8sanmgkkxlx1" path="res://Assets/Lizard.png" id="2_tnq81"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r1mxn"]
+size = Vector3(2.9812, 3.16309, 2.35669)
+
+[sub_resource type="Curve3D" id="Curve3D_56o72"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0)
+}
+point_count = 1
+up_vector_enabled = false
+
+[node name="Unit" type="Node3D" groups=["units"]]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 1.52239, 0)
+script = ExtResource("1_qs01i")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." groups=["units"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1.92, 0, 0, 0, 1.92, 0, 0, 0, 1.92, 0.322734, -0.304688, -0.281484)
+shape = SubResource("BoxShape3D_r1mxn")
+
+[node name="Path3D" type="Path3D" parent="RigidBody3D"]
+curve = SubResource("Curve3D_56o72")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="RigidBody3D/Path3D"]
+rotation_mode = 0
+loop = false
+
+[node name="Sprite3D" type="Sprite3D" parent="RigidBody3D/Path3D/PathFollow3D"]
+pixel_size = 0.1
+billboard = 2
+alpha_cut = 2
+texture_filter = 2
+texture = ExtResource("2_tnq81")
+
+[connection signal="input_event" from="RigidBody3D" to="." method="_on_rigid_body_3d_input_event"]

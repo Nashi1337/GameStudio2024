@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cn72r2f758l85"]
+[gd_scene load_steps=4 format=3 uid="uid://cn72r2f758l85"]
 
 [ext_resource type="Texture2D" uid="uid://ccblfoagqgr2o" path="res://Assets/Tree_SpriteSheet_Outlined.png" id="1_6egpc"]
+[ext_resource type="Script" path="res://Scripts/tree.gd" id="1_h6ldj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3l73c"]
+size = Vector3(1, 1, 0.888184)
 
 [node name="Tree" type="Node3D"]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0.637938, 0)
+script = ExtResource("1_h6ldj")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 alpha_cut = 2
@@ -13,3 +18,15 @@ hframes = 5
 frame = 1
 region_enabled = true
 region_rect = Rect2(0, 0, 448, 128)
+
+[node name="Area3D" type="Area3D" parent="."]
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0213016)
+shape = SubResource("BoxShape3D_3l73c")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

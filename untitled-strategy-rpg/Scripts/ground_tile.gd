@@ -13,15 +13,15 @@ var in_range = false
 @onready var border : MeshInstance3D
 @onready var game_manager = get_node("/root/BattleMap")
 @onready var tree_scene = preload("res://Scenes/tree.tscn")
-@onready var hud = get_tree().root.get_node("BattleMap/CanvasLayer/HUD")
-@onready var hud_tile_info = get_tree().root.get_node("BattleMap/CanvasLayer/HUD/Panel/TileInfo")
+@onready var infobar = get_tree().root.get_node("BattleMap/CanvasLayer/HUD/InfoBar")
+@onready var hud_tile_info = get_tree().root.get_node("BattleMap/CanvasLayer/HUD/InfoBar/TileInfo")
 @onready var camera = get_viewport().get_camera_3d()
 
 func _ready() -> void:
 	type = "Grass"
 	maybe_spawn_tree()
 	setup_border()
-	hud.visible = false
+	infobar.visible = false
 
 func setup_border():
 	border = $Border
@@ -42,8 +42,6 @@ func maybe_spawn_tree():
 		tree_instance.scale = Vector3(1,50,1)
 		var random_pos = Vector3(randf() * 1.0 -0.5, 0, randf() * 1.0 - 0.5)
 		tree_instance.position = Vector3(random_pos.x,33,random_pos.z)
-		
-		print("Tree spawned with frame: ", tree_sprite.frame)
 
 func set_coordinates(coords: Vector2):
 	grid_coordinates = coords
@@ -61,15 +59,15 @@ func _on_static_body_3d_mouse_entered() -> void:
 	mouse_over = true
 	border_material.albedo_color = highlight_color
 	hud_tile_info.text = type
-	hud.visible = true
+	infobar.visible = true
 	
 func _on_static_body_3d_mouse_exited() -> void:
 	if mouse_over and not in_range:
 		remove_highlight()
-		hud.visible = false
+		infobar.visible = false
 		mouse_over=false
 	elif mouse_over and in_range:
-		hud.visible = false
+		infobar.visible = false
 		mouse_over = false
 		highlight()
 
@@ -78,4 +76,5 @@ func highlight():
 	border_material.albedo_color = in_range_color
 
 func remove_highlight():
+	in_range = false
 	border_material.albedo_color = original_color

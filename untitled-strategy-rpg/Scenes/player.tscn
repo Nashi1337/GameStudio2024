@@ -3,9 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://odcvaohl0hlb" path="res://Assets/BaboSpriteSheet.png" id="1_tfq7n"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_xwwi5"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q6a20"]
-radius = 1.435
-height = 3.804
+[sub_resource type="BoxShape3D" id="BoxShape3D_1nyh1"]
+size = Vector3(1.44049, 3.04773, 1)
 
 [sub_resource type="Curve3D" id="Curve3D_56o72"]
 _data = {
@@ -15,13 +14,14 @@ _data = {
 point_count = 1
 up_vector_enabled = false
 
-[node name="Player" type="Node3D"]
+[node name="Player" type="Node3D" groups=["units"]]
 script = ExtResource("1_xwwi5")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("CapsuleShape3D_q6a20")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00723267, 0.250671, 0)
+shape = SubResource("BoxShape3D_1nyh1")
 
 [node name="Path3D" type="Path3D" parent="RigidBody3D"]
 curve = SubResource("Curve3D_56o72")
